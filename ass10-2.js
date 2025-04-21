@@ -23,7 +23,7 @@ server = http.createServer(function(req, res) {
 
         req.on('end', async () => {
             const parsed = querystring.parse(body);
-            const input = parsed.query.trim();
+            const input = parsed.query.trim().replace(/\r$/, '');
             try {
                 await client.connect();
                 const db = client.db(dbName);
@@ -32,10 +32,12 @@ server = http.createServer(function(req, res) {
                 let result;
         
                 if (/^\d/.test(input)) {
-                  //starts with a number
-                  result = await collection.findOne({ zipcodes: { $in: [input] } });
+                  // starts with a number
+                  result = await collection.findOne({
+                    zipcodes: { $elemMatch: { $elemMatch: { $regex: `^${input}\\r?$` } } }
+                  });
                 } else {
-                  //place name
+                  // place name
                   result = await collection.findOne({ placeName: input });
                 }
         
@@ -43,7 +45,8 @@ server = http.createServer(function(req, res) {
         
                 res.writeHead(200, {'Content-Type': 'text/html'});
                 if (result) {
-                  res.end(`<h2>${result.placeName}: ${result.zipcodes.join(', ')}</h2>`);
+                  const zipList = result.zipcodes.flat().map(z => z.trim()).join(', ');
+                  res.end(`<h2>${result.placeName}: ${zipList}</h2>`);
                 } else {
                   res.end(`<h2>No match found for "${input}".</h2>`);
                 }
