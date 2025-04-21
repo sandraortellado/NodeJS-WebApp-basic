@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-webapp-basic",
+  "version": "1.0.0",
+  "main": "ass10-2.js",
+  "scripts": {
+    "start": "node ass10-2.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandraortellado/NodeJS-WebApp-basic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandraortellado/NodeJS-WebApp-basic/issues"
+  },
+  "homepage": "https://github.com/sandraortellado/NodeJS-WebApp-basic#readme",
+  "description": ""
+}
