@@ -2,6 +2,7 @@ var http  = require('http');
 var fs = require('fs')
 const { MongoClient } = require('mongodb');
 const querystring = require('querystring');
+const port = process.env.PORT || 3000;
 
 const uri = "mongodb+srv://sortel01:dBBTl83Z20HL93Eu@cluster0.9a9rbxp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri);
@@ -60,6 +61,6 @@ server = http.createServer(function(req, res) {
         res.writeHead(404);
         res.end("Not found");
     }
-}).listen(3000, () => {
-    console.log("Server running at http://localhost:3000");
-}); 
+}).listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
