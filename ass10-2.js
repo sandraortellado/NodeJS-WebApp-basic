@@ -33,7 +33,7 @@ server = http.createServer(function(req, res) {
         
                 if (/^\d/.test(input)) {
                   //starts with a number
-                  result = await collection.findOne({ zipcodes: input });
+                  result = await collection.findOne({ zipcodes: { $in: [input] } });
                 } else {
                   //place name
                   result = await collection.findOne({ placeName: input });
