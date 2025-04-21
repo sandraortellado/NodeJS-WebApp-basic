@@ -16,5 +16,8 @@
     "url": "https://github.com/sandraortellado/NodeJS-WebApp-basic/issues"
   },
   "homepage": "https://github.com/sandraortellado/NodeJS-WebApp-basic#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "mongodb": "^10.9.2"
+  }
 }
